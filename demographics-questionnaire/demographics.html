@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>TheFragebogen: questionnaire featuress</title>
+        <link rel="stylesheet" type="text/css" href="example.css">
+
+        <style>
+        .questionnaireItem {
+            width: 40em;
+            margin-left: auto;
+            margin-right: auto;
+
+            border-style: inset;
+            background-color: Snow;
+            padding: 0.5em;
+        }
+
+        .Required,
+        .questionnaireItemRequired, 
+		.questionnaireItemMultiRequired,
+		.questionnaireItemOneRequired{
+            outline: none;
+            border-color: red;
+            ;
+            box-shadow: 0 0 1em red;
+        }
+
+        .screenPreview table {
+            width: 100%;
+            border-collapse: collapse;
+            word-break: break-all;
+        }
+
+        .screenPreview table td,
+        .screenPreview table th {
+            font-size: 1em;
+            border: 1px solid #98bf21;
+            padding: 3px 7px 2px 7px;
+        }
+
+        .screenPreview table th {
+            font-size: 1.1em;
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: #A7C942;
+            color: #ffffff;
+        }
+
+        .screenPreview table tr.alt td {
+            color: #000000;
+            background-color: #EAF2D3;
+        }
+
+        .iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+            overflow: hidden;
+        }
+		
+		.questionnaireItemDefinedOne
+			{width:40em;
+			margin-left:auto;
+			margin-right:auto;
+			border-style:inset;
+			background-color:Snow;
+			padding:0.5em
+		}
+		
+		.questionnaireItemOne table tbody tr td
+			{width:1em}
+			
+		.questionnaireItemMulti
+			{width:40em;
+			margin-left:auto;
+			margin-right:auto;
+			border-style:noframes;
+			background-color:Snow;
+			padding:0.5em
+		}
+
+        </style>
+
+
+        <script src="thefragebogen.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/country-list@2.3.0/country-list.min.js"></script>
+        <script>
+		//This array stores all screens that will be shown.
+        var screens = [];
+		
+		var screen1 = new ScreenUIElements(
+        //var questionnaireItems = [];
+			new UIElementHTML(undefined, "<h2>Before we start, please provide the following information:</h2>"),
+
+			//new UIElementButton(undefined, "Absenden", function() {alert("UIElementButton was pressed.")})
+		);
+			
+		screens.push(screen1);
+
+		// Free text to enter age
+		var screen2 = new ScreenUIElements(
+			new QuestionnaireItemText("questionnaireItemOne", "How old are you?", true),
+		)
+		
+		screens.push(screen2);
+
+		// Drop down to indicate gender
+		var screen3 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "Please indicate the gender you most identify with", true, ["female", "male", "non-binary", "other", "would rather not say"]),
+		)
+
+		screens.push(screen3);
+
+		// LGBTIQ+ question
+		var screen4 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "Do you identify as LGBTIQ+?", true, ["yes", "no", "not sure"]),
+		)
+
+		screens.push(screen4);
+
+		// Education level
+		var screen5 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "What is the highest attained level of education?", true, ["Lower than High School or none", "High School", "Voctional Training", "Undergraduate (B.A., B.Sc. or comparable)", "Graduate (M.A., M.Sc. or comparable)", "Doctoral Degree"]),
+		)
+
+		screens.push(screen5);
+
+		// Architecture theorey
+		var screen6 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "Do you have experience with architectural theory or some form of training in the field of architecture, urban design, or an adjacent field?", true, ["yes", "no"]),
+		)
+
+		screens.push(screen6);
+
+		// Interest in architecture
+		var screen7 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "How interested are you in architecture?<br> (1 - not at all, 7 - very interested)", true, ["1","2","3","4","5","6","7"]),
+		)
+
+		screens.push(screen7);
+
+		// City size growing up
+		var screen8 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "How big was the city where you spent most of the first 15 years of your life?", true, ["Less than 5.000 inhabitants", "5.000 - 20.000 inhabitants", "20.000 - 100.000 inhabitants", "100.000 - 1 million inhabitants", "More than 1 million inhabitants"]),
+		)
+
+		screens.push(screen8);
+
+		// City size now
+		var screen9 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "How big is the city where you live now?", true, ["Less than 5.000 inhabitants", "5.000 - 20.000 inhabitants", "20.000 - 100.000 inhabitants", "100.000 - 1 million inhabitants", "More than 1 million inhabitants"]),
+		)
+
+		screens.push(screen9);
+
+		// Country of birth
+		const countryList = [
+			"Afghanistan",
+			"Albania",
+			"Algeria",
+			"American Samoa",
+			"Andorra",
+			"Angola",
+			"Anguilla",
+			"Antarctica",
+			"Antigua and Barbuda",
+			"Argentina",
+			"Armenia",
+			"Aruba",
+			"Australia",
+			"Austria",
+			"Azerbaijan",
+			"Bahamas (the)",
+			"Bahrain",
+			"Bangladesh",
+			"Barbados",
+			"Belarus",
+			"Belgium",
+			"Belize",
+			"Benin",
+			"Bermuda",
+			"Bhutan",
+			"Bolivia (Plurinational State of)",
+			"Bonaire, Sint Eustatius and Saba",
+			"Bosnia and Herzegovina",
+			"Botswana",
+			"Bouvet Island",
+			"Brazil",
+			"British Indian Ocean Territory (the)",
+			"Brunei Darussalam",
+			"Bulgaria",
+			"Burkina Faso",
+			"Burundi",
+			"Cabo Verde",
+			"Cambodia",
+			"Cameroon",
+			"Canada",
+			"Cayman Islands (the)",
+			"Central African Republic (the)",
+			"Chad",
+			"Chile",
+			"China",
+			"Christmas Island",
+			"Cocos (Keeling) Islands (the)",
+			"Colombia",
+			"Comoros (the)",
+			"Congo (the Democratic Republic of the)",
+			"Congo (the)",
+			"Cook Islands (the)",
+			"Costa Rica",
+			"Croatia",
+			"Cuba",
+			"Curaçao",
+			"Cyprus",
+			"Czechia",
+			"Côte d'Ivoire",
+			"Denmark",
+			"Djibouti",
+			"Dominica",
+			"Dominican Republic (the)",
+			"Ecuador",
+			"Egypt",
+			"El Salvador",
+			"Equatorial Guinea",
+			"Eritrea",
+			"Estonia",
+			"Eswatini",
+			"Ethiopia",
+			"Falkland Islands (the) [Malvinas]",
+			"Faroe Islands (the)",
+			"Fiji",
+			"Finland",
+			"France",
+			"French Guiana",
+			"French Polynesia",
+			"French Southern Territories (the)",
+			"Gabon",
+			"Gambia (the)",
+			"Georgia",
+			"Germany",
+			"Ghana",
+			"Gibraltar",
+			"Greece",
+			"Greenland",
+			"Grenada",
+			"Guadeloupe",
+			"Guam",
+			"Guatemala",
+			"Guernsey",
+			"Guinea",
+			"Guinea-Bissau",
+			"Guyana",
+			"Haiti",
+			"Heard Island and McDonald Islands",
+			"Holy See (the)",
+			"Honduras",
+			"Hong Kong",
+			"Hungary",
+			"Iceland",
+			"India",
+			"Indonesia",
+			"Iran (Islamic Republic of)",
+			"Iraq",
+			"Ireland",
+			"Isle of Man",
+			"Israel",
+			"Italy",
+			"Jamaica",
+			"Japan",
+			"Jersey",
+			"Jordan",
+			"Kazakhstan",
+			"Kenya",
+			"Kiribati",
+			"Korea (the Democratic People's Republic of)",
+			"Korea (the Republic of)",
+			"Kuwait",
+			"Kyrgyzstan",
+			"Lao People's Democratic Republic (the)",
+			"Latvia",
+			"Lebanon",
+			"Lesotho",
+			"Liberia",
+			"Libya",
+			"Liechtenstein",
+			"Lithuania",
+			"Luxembourg",
+			"Macao",
+			"Madagascar",
+			"Malawi",
+			"Malaysia",
+			"Maldives",
+			"Mali",
+			"Malta",
+			"Marshall Islands (the)",
+			"Martinique",
+			"Mauritania",
+			"Mauritius",
+			"Mayotte",
+			"Mexico",
+			"Micronesia (Federated States of)",
+			"Moldova (the Republic of)",
+			"Monaco",
+			"Mongolia",
+			"Montenegro",
+			"Montserrat",
+			"Morocco",
+			"Mozambique",
+			"Myanmar",
+			"Namibia",
+			"Nauru",
+			"Nepal",
+			"Netherlands (the)",
+			"New Caledonia",
+			"New Zealand",
+			"Nicaragua",
+			"Niger (the)",
+			"Nigeria",
+			"Niue",
+			"Norfolk Island",
+			"Northern Mariana Islands (the)",
+			"Norway",
+			"Oman",
+			"Pakistan",
+			"Palau",
+			"Palestine, State of",
+			"Panama",
+			"Papua New Guinea",
+			"Paraguay",
+			"Peru",
+			"Philippines (the)",
+			"Pitcairn",
+			"Poland",
+			"Portugal",
+			"Puerto Rico",
+			"Qatar",
+			"Republic of North Macedonia",
+			"Romania",
+			"Russian Federation (the)",
+			"Rwanda",
+			"Réunion",
+			"Saint Barthélemy",
+			"Saint Helena, Ascension and Tristan da Cunha",
+			"Saint Kitts and Nevis",
+			"Saint Lucia",
+			"Saint Martin (French part)",
+			"Saint Pierre and Miquelon",
+			"Saint Vincent and the Grenadines",
+			"Samoa",
+			"San Marino",
+			"Sao Tome and Principe",
+			"Saudi Arabia",
+			"Senegal",
+			"Serbia",
+			"Seychelles",
+			"Sierra Leone",
+			"Singapore",
+			"Sint Maarten (Dutch part)",
+			"Slovakia",
+			"Slovenia",
+			"Solomon Islands",
+			"Somalia",
+			"South Africa",
+			"South Georgia and the South Sandwich Islands",
+			"South Sudan",
+			"Spain",
+			"Sri Lanka",
+			"Sudan (the)",
+			"Suriname",
+			"Svalbard and Jan Mayen",
+			"Sweden",
+			"Switzerland",
+			"Syrian Arab Republic",
+			"Taiwan",
+			"Tajikistan",
+			"Tanzania, United Republic of",
+			"Thailand",
+			"Timor-Leste",
+			"Togo",
+			"Tokelau",
+			"Tonga",
+			"Trinidad and Tobago",
+			"Tunisia",
+			"Turkey",
+			"Turkmenistan",
+			"Turks and Caicos Islands (the)",
+			"Tuvalu",
+			"Uganda",
+			"Ukraine",
+			"United Arab Emirates (the)",
+			"United Kingdom of Great Britain and Northern Ireland (the)",
+			"United States Minor Outlying Islands (the)",
+			"United States of America (the)",
+			"Uruguay",
+			"Uzbekistan",
+			"Vanuatu",
+			"Venezuela (Bolivarian Republic of)",
+			"Viet Nam",
+			"Virgin Islands (British)",
+			"Virgin Islands (U.S.)",
+			"Wallis and Futuna",
+			"Western Sahara",
+			"Yemen",
+			"Zambia",
+			"Zimbabwe",
+			"Åland Islands"
+		];
+
+
+		var screen10 = new ScreenUIElements(
+			new QuestionnaireItemDefinedSelector("questionnaireItemOne", "In which country were you born?", true, countryList),
+		)
+
+		screens.push(screen10);
+		
+
+	/*			
+		var screen21 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Wenn ich mit dem Auto zu einem neuen Ziel fahre, dann benutze ich regelmäßig ein Navigationssystem.<br> (1 - Stimme stark zu, 7 - Lehne stark ab)", true, ["1","2","3","4","5","6","7"]),
+		);
+			
+		screens.push(screen21);
+	*/
+	
+	/*
+		var screen22 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Wenn ich eine neue Route plane, nutze ich regelmäßig einen Routenplaner im Internet.<br> (1 - Stimme stark zu, 7 - Lehne stark ab)", true, ["1","2","3","4","5","6","7"]),
+		);
+			
+		screens.push(screen22);
+	*/
+	
+	/*
+		var screen23 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Wenn ich in einer fremden Stadt als Fußgänger unterwegs bin, nutze ich eine Navigationsanwendung auf meinem Smartphone (bzw. ein mobiles Navigationssystem), um mich zu orientieren und meinen Weg zu finden.<br> (1 - Stimme stark zu, 7 - Lehne stark ab)", true, ["1","2","3","4","5","6","7"]),
+		);
+		
+		screens.push(screen23);
+	*/
+	
+	/*
+		var screen24 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Wenn ich eine neue Route plane, benutze ich regelmäßig gedrucktes Kartenmaterial.<br> (1 - Stimme stark zu, 7 - Lehne stark ab)", true, ["1","2","3","4","5","6","7"]),
+		);
+			
+		screens.push(screen24);
+	*/
+	
+	/*
+		var screen25 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Ich besitze ein mobiles Navigationsgerät, das für die Nutzung im Auto geeignet ist.", true, ["Ja", "Nein"]),
+		);
+				
+		screens.push(screen25);
+	*/
+	/*
+		var screen26 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Ich besitze ein Smartphone mit Navigationsfunktion.", true, ["Ja", "Nein"]]),
+		);
+			
+		screens.push(screen26);
+	*/
+	
+	/*
+		var screen27 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Ich besitze ein Auto mit einem fest eingebauten Navigationssystem.", true, ["Ja", "Nein"]),
+		);
+			
+		screens.push(screen27);
+	*/
+	
+	/*
+		var screen28 = new ScreenUIElements(
+			new QuestionnaireItemDefinedOne("questionnaireItemOne", "Ich besitze einen Tablet-PC mit Navigationsfunktion.", true, ["Ja", "Nein"]),
+		);
+			
+		screens.push(screen28);
+	*/
+	
+	/*
+		var screen29 = new ScreenUIElements(
+        //var questionnaireItems = [];
+			new UIElementHTML(undefined, "Auf der nächsten Seite sehen Sie nochmals ihre Antworten.<br> Bitte überprüfen Sie diese auf ihre Korrektheit."),
+			//new UIElementButton(undefined, "Absenden", function() {alert("UIElementButton was pressed.")})
+		);
+			
+		screens.push(screen29);
+	*/				
+		
+		//This screen shows a preview of the collected data.
+        screens.push(new ScreenDataPreview("screenPreview", false));
+
+        //This screen triggers the download all collected data (CSV).
+        //This includes also the changelog of all QuestionnaireItems.
+        screens.push(new ScreenWaitDataDownload(undefined, "The End<br>All data should now be downloaded (incl. changes of questionnaireItems and their final answers).", "TheFragebogen-Ausgangslage.csv", true));
+
+        //Most important: create the ScreenController
+        var screenController = new ScreenController(screens);
+        </script>
+
+     <script>
+        //Having the start()-function in an extra script-tag makes sure that it will be executed even if there are errors in the script-tag configuring TheFragebogen.
+        function start() {
+            document.body.innerHTML += "TheFragebogen loaded.";
+            if (typeof(screenController) === "undefined") {
+                document.body.innerHTML += "<br><i>Something went wrong:</i> Please check that thefragebogen.js was loaded and that the configuration is ok.";
+                return;
+            }
+            screenController.init(document.body);
+            screenController.start();
+        }
+
+        </script>
+    </head>
+
+    <body onload="start()">
+        <p>
+            TheFragebogen will be shown here.<br> If something fails while starting, an error message will be shown here.
+        </p>
+    </body>
+
+</html>
