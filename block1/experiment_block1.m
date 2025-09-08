@@ -1,5 +1,6 @@
 
-addpath(genpath(".\scripts\"));
+addpath(genpath(fullfile('..', 'library', 'liblsl-Matlab')));
+addpath(genpath('.\scripts\'));
 
 clear
 
