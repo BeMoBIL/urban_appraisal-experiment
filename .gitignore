@@ -1,0 +1,46 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Windows/Mac temp files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.~lock.*
+~$*
+
+# MATLAB temp and backup files
+*.asv
+*.m~ 
+*.fig~ 
+*.mdl~ 
+*.slx~ 
+*.autosave
+
+# VS Code settings
+.vscode/
+
+# Python cache (if any Python scripts)
+__pycache__/
+*.pyc
+
+# Node.js (for questionnaire)
+node_modules/
+npm-debug.log
+
+# Ignore git submodule artifacts
+.gitmodules
+
+# Ignore log files
+*.log
