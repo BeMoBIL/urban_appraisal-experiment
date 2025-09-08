@@ -5,6 +5,8 @@ This repository contains code, resources and instructions for running the Urban 
 ## Overview
 The experiment consists of two experimental blocks ('block1' and 'block2')., each presenting a series of urban stimuli in a randomized order and collecting participant ratings on various scales including the Self Assessment Manikin (SAM). Event markers are sent via LSL for synchronization with physiological recordings. A separate web-based questionnaire collects demographic data and saves them as a .csv file.
 
+The stimuli that can be found in the ressources folders were used in the Study ... (add study info here).
+
 ## Folder Structure
 urban_appraisal-experiment/
 │
@@ -87,3 +89,18 @@ Saved in 'Fragebogen_completed' (if using the example servers)
 
 Feel free to use and adapt this code for academic purposes.
 For questions, contact the repository maintainer.
+
+## Citations
+
+If you use this code or data, please cite the following resources as appropriate:
+
+- **Self-Assessment Manikin (SAM):**  
+  Bradley, M. M., & Lang, P. J. (1994). Measuring emotion: The Self-Assessment Manikin and the Semantic Differential. *Journal of Behavior Therapy and Experimental Psychiatry*, 25(1), 49–59. https://doi.org/10.1016/0005-7916(94)90063-9
+
+- **Lab Streaming Layer (LSL):**  
+  Kothe, C., Shirazi, S. Y., Stenner, T., Medine, D., Boulay, C., Grivich, M. I., ... & Makeig, S. (2025). The lab streaming layer for synchronized multimodal recording. Imaging Neuroscience. https://doi.org/10.1162/IMAG.a.136
+
+- **Psychtoolbox:**  
+  Brainard, D. H. (1997). The Psychophysics Toolbox. *Spatial Vision*, 10(4), 433–436.  
+  Kleiner, M., Brainard, D., & Pelli, D. (2007). What's new in Psychtoolbox-3? *Perception*, 36(14), 1.  
+  http://psychtoolbox.org/
