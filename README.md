@@ -1,9 +1,9 @@
 # Urban Appraisal Experiment
 
-This repository contains code, resources and instructions for running the Urban Appraisal Experiment. The experiment is implemented in MATLAB using Psychotoolbox and Lab Streaming Layer (LSL), and includes a web-based demographics questionnaire. 
+This repository contains code, resources and instructions for running the Urban Appraisal Experiment. The experiment is implemented in MATLAB using Psychotoolbox and Lab Streaming Layer (LSL).
 
 ## Overview
-The experiment consists of two experimental blocks ([block1/](./block1/) and [block2/](./block2/)), each presenting a series of urban stimuli in a randomized order and collecting participant ratings on various scales including the Self Assessment Manikin (SAM). Event markers are sent via LSL for synchronization with physiological recordings. A separate web-based questionnaire collects demographic data and saves them as a `.csv` file.
+The experiment consists of two experimental blocks ([block1/](./block1/) and [block2/](./block2/)), each presenting a series of urban stimuli in a randomized order and collecting participant ratings on various scales including the Self Assessment Manikin (SAM). Event markers are sent via LSL for synchronization with physiological recordings.
 
 The experiment starts with a baseline recording in which a timed screen is shown to participants. Subsequently, the 27/28 images of the respective blocks are being presented randomly with the nine scales arousal, dominance, and valence (all SAM; 9-point Likert scale) as well as beauty, fascination, hominess, openness, stress and safety. 
 For each scale, a prime is shown for 1000ms _(stress: relaxed – stressful; openness: narrow – open; safety: unsafe – safe; beauty: ugly – beautiful; hominess: alienated – at home; fascination: boring – fascinating; arousal: excited – calm; valence: happy – unhappy; dominance: controlled – in control)_, followed by a 500ms fixation cross, 3000ms image presentation and the respective rating scale until an answer has been logged via mouse click. This repeats until every stimulus x scale compination has been presented.
@@ -31,16 +31,6 @@ urban_appraisal-experiment/
 │   ├── results/
 │   └── scripts/
 │
-├── demographics-questionnaire/
-│   ├── demographics.html
-│   ├── example_export_nodejs_upload.js
-│   ├── example_websockets_nodejs_server_echo.js
-│   ├── example_websockets_nodejs_server_relay.js
-│   ├── example.css
-│   ├── package.json
-│   ├── thefragebogen.js
-│   └── Fragebogen_completed/
-│
 ├── library/
 │   ├── liblsl-Matlab
 │
@@ -52,9 +42,6 @@ MATLAB
 - MATLAB R2018b or newer recommended
 - Psychtoolbox (for stimulus presentation)
 - Lab Streaming Layer (LSL) (included in scripts/library/liblsl-Matlab/)
-
-Node.js (for questionnaire, optional)
-- Node.js (for running example servers in 'demographics-questionnaire')
 
 ## Setup
 1. **Clone or download** this repository.
@@ -79,19 +66,8 @@ _Note:_ Results will be saved in the respective `results/` folder.
 Event markers are sent via LSL for synchronization.
 
 
-
-**Demographics Questionnaire**
-
-The `demographics-questionnaire` folder contains a web-based questionnaire for collecting participant sociodemographic information. 
-
-_(More info here)_
-
 ## Data Output
- - Experimental data:
-saved as `.csv` files in `results` in [block1/](./block1/) and [block2/](./block2/) folders respectively.
-
-- Demographics data:
-Saved in 'Fragebogen_completed' (if using the example servers)
+Experimental data saved as `.csv` files in `results` in [block1/](./block1/) and [block2/](./block2/) folders respectively.
 
 ## Credits and License
 
